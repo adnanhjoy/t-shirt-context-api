@@ -3,6 +3,7 @@ import { useLoaderData } from 'react-router-dom';
 import TShirt from '../TShirt/TShirt';
 import './Home.css';
 import Cart from '../Cart/Cart';
+import { shoppingCart } from '../../storage/storage';
 
 const Home = () => {
     const tshirts = useLoaderData();
@@ -15,6 +16,7 @@ const Home = () => {
         }else{
             setCart([...cart, tshirt]);
         }
+        shoppingCart(tshirt._id)
         
     }
 

@@ -1,8 +1,9 @@
 import React from 'react';
+import './Cart.css';
 
 const Cart = ({cart, removeProduct}) => {
     return (
-        <div>
+        <div className='cart-detail'>
             <h2>Order Summary{cart.length}</h2>
             {
                 cart.map(tshirt => <p
