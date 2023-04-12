@@ -1,13 +1,23 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import TShirt from '../TShirt/TShirt';
 import './Home.css';
 import Cart from '../Cart/Cart';
-import { shoppingCart } from '../../storage/storage';
+import { getShoppingCart, shoppingCart } from '../../storage/storage';
 
 const Home = () => {
     const tshirts = useLoaderData();
     const [cart, setCart] = useState([]);
+
+    useEffect(() => {
+        const storedCart = getShoppingCart();
+        const savedCart = [];
+        for(const id in storedCart){
+            const addedCart = tshirts.filter(tshirt => tshirt._id === id);
+            savedCart.push(addedCart)
+        }
+        setCart(savedCart)
+    }, [])
 
     const buyNowBtn = (tshirt) => {
         const exixt = cart.find(ts => ts._id === tshirt._id);
